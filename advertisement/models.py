@@ -10,6 +10,11 @@ def main_pictures_path(_instance, filename):
     safe_name = str(uuid4())
     return posixpath.join("main_pictures", "{}{}".format(safe_name, ext))
 
+class Category(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+
 class Advertisement(models.Model):
 
     STATUS_CHOICES = (
@@ -26,4 +31,5 @@ class Advertisement(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=19)
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     main_picture = models.ImageField(upload_to=main_pictures_path)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="advertisements")
 
