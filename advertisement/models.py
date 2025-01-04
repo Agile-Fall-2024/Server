@@ -10,13 +10,14 @@ def main_pictures_path(_instance, filename):
     safe_name = str(uuid4())
     return posixpath.join("main_pictures", "{}{}".format(safe_name, ext))
 
+
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     description = models.TextField()
 
-class Advertisement(models.Model):
 
+class Advertisement(models.Model):
     STATUS_CHOICES = (
         (1, "ACTIVE"),
         (2, "RESOLVED"),
@@ -33,3 +34,14 @@ class Advertisement(models.Model):
     main_picture = models.ImageField(upload_to=main_pictures_path)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="advertisements")
 
+
+class Report(models.Model):
+    id = models.AutoField(primary_key=True)
+    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name="reports")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reports")
+    reason = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Report by {self.user} on Ad {self.advertisement.id}"
