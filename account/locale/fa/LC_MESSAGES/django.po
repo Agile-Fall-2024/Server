@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-03 15:18+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: account/serializers.py:17
+msgid "This phone number is already taken."
+msgstr "این شماره تلفن قبلا استفاده شده است."
+
+#: account/serializers.py:34
+msgid "A user with that email already exists."
+msgstr "کاربری با این آدرس ایمیل از قبل وجود دارد."
+
+#: account/views.py:20 account/views.py:50 account/views.py:161
+msgid "Bad Request"
+msgstr "درخواست نامعتبر است."
+
+#: account/views.py:36 account/views.py:87
+msgid "Username"
+msgstr "نام کاربری"
+
+#: account/views.py:37
+msgid "Password"
+msgstr "گذرواژه"
+
+#: account/views.py:43
+msgid "OTP sent"
+msgstr "کد تایید ارسال شد."
+
+#: account/views.py:46 account/views.py:76
+msgid "OTP sent to your email address. Please verify OTP to proceed."
+msgstr "کد تایید به ایمیل شما ارسال شد. لطفاً برای ادامه کد دریافت شده را وارد کنید."
+
+#: account/views.py:51
+msgid "Unauthorized"
+msgstr "مجاز نیستید."
+
+#: account/views.py:60
+msgid "Please provide both username and password."
+msgstr "لطفاً نام کاربری و گذرواژه را وارد کنید."
+
+#: account/views.py:69
+msgid "Ciz-Miz Login OTP"
+msgstr "کد تایید ورود چیز میز: "
+
+#: account/views.py:70
+#, python-format
+msgid "Your OTP for login is: %(otp)s"
+msgstr "کد تایید شما برای ورود: %(otp)s"
+
+#: account/views.py:79
+msgid "Invalid credentials"
+msgstr "نام کاربری یا گذرواژه وارد شده نادرست است."
+
+#: account/views.py:88
+msgid "OTP"
+msgstr "کد تایید"
+
+#: account/views.py:93 account/views.py:118
+msgid "Login successful"
+msgstr "ورود با موفقیت انجام شد."
+
+#: account/views.py:94
+msgid "Invalid or expired OTP"
+msgstr "کد تایید نامعتبر یا منقضی شده است."
+
+#: account/views.py:95
+msgid "User not found"
+msgstr "کاربر پیدا نشد."
+
+#: account/views.py:104
+msgid "Please provide both username and OTP."
+msgstr "لطفاً نام کاربری و کد تایید را وارد کنید."
+
+#: account/views.py:124
+msgid "Invalid or expired OTP."
+msgstr "کد تایید نامعتبر یا منقضی شده است."
+
+#: account/views.py:126
+msgid "User not found."
+msgstr "کاربر پیدا نشد."
+
+#: account/views.py:132 account/views.py:137
+msgid "Logout successful"
+msgstr "خروج با موفقیت انجام شد."

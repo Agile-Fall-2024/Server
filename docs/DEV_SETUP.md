@@ -63,6 +63,19 @@ If you install any new packages, update requirements.txt.
 
 Keeping requirements.txt updated will simplify future containerization.
 
+## 7. Message Translateion
+
+To update po files after adding new message:
+```bash
+django-admin makemessages -l fa
+```
+
+To Compile po files:
+
+```bash
+django-admin compilemessages
+```
+
 ### Notes:
 - Ensure you have Python 3.x and pip installed.
 - Always activate the virtual environment before running commands to ensure dependencies are isolated.
