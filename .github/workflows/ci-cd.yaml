@@ -61,4 +61,6 @@ jobs:
             -e EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} \
             -e CSRF_TRUSTED_ORIGINS=${{ secrets.CSRF_TRUSTED_ORIGINS }} \
             -p 8000:8000 \
+            -v /etc/chizmiz/staticfiles:/app/staticfiles \
+            -v /etc/chizmiz/media:/app/media \
             ghcr.io/${{ github.repository }}/django:latest
