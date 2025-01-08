@@ -38,7 +38,9 @@ class Advertisement(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="advertisements")
 
     def __str__(self):
-        return f"{self.title} - ${self.price}"
+        return f"{self.title} - {self.price}T"
+    
+
 class Report(models.Model):
     id = models.AutoField(primary_key=True)
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name="reports")
