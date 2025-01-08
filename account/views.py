@@ -116,7 +116,9 @@ class OTPVerificationView(APIView):
                 return Response(
                     {
                         'message': _("Login successful"),
-                        'phone_number': account.phone_number
+                        'phone_number': account.phone_number,
+                        'first_name' : user.first_name,
+                        'last_name' : user.last_name,
                     },
                     status=status.HTTP_200_OK
                 )
