@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-03 15:18+0330\n"
+"POT-Creation-Date: 2025-01-08 19:35+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: account/models.py:12
+msgid "account"
+msgstr "حساب کاربری"
+
+#: account/models.py:13
+msgid "Accounts"
+msgstr "حساب‌های کاربری"
+
+#: account/models.py:16
+msgid "phone number"
+msgstr "تلفن همراه"
+
+#: account/models.py:17
+msgid "bio"
+msgstr "بیوگرافی"
+
+#: account/models.py:18
+msgid "address"
+msgstr "آدرس"
 
 #: account/serializers.py:17
 msgid "This phone number is already taken."
