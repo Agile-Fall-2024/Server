@@ -3,13 +3,19 @@ from django.utils.timezone import now
 from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class Account(models.Model):
+
+    class Meta:
+        verbose_name = _("account")
+        verbose_name_plural = _("Accounts")
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
-    phone_number = models.CharField(max_length=20, blank=True, null=True, unique=True)
-    bio = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True, unique=True, verbose_name=_("phone number"))
+    bio = models.TextField(blank=True, null=True, verbose_name=_("bio"))
+    address = models.TextField(blank=True, null=True, verbose_name=_("address"))
     otp = models.CharField(max_length=6, blank=True, null=True)
     otp_expiry = models.DateTimeField(blank=True, null=True)
 
