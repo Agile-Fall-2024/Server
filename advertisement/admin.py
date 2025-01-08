@@ -1,5 +1,6 @@
 from django.contrib import admin
-
+from django.utils.html import format_html
+from django.urls import reverse
 from advertisement.models import Advertisement, Category, Report
 
 
@@ -39,7 +40,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ('id', 'advertisement', 'user', 'reason', 'is_read', 'created_at')
+    list_display = ('id', 'advertisement_link', 'user', 'reason', 'is_read', 'created_at')
     list_filter = ('is_read', 'created_at')
     search_fields = ('advertisement__title', 'user__username', 'reason')
     ordering = ('-created_at',)
@@ -56,5 +57,11 @@ class ReportAdmin(admin.ModelAdmin):
         self.message_user(request, "Selected reports marked as read.")
 
     mark_as_read.short_description = "Mark selected reports as read"
-
     actions = [mark_as_read]
+
+    def advertisement_link(self, obj):
+        url = reverse('admin:advertisement_advertisement_change', args=[obj.advertisement.id])
+        return format_html('<a href="{}">{}</a>', url, obj.advertisement)
+
+    advertisement_link.short_description = "Advertisement"
+    advertisement_link.admin_order_field = 'advertisement'
