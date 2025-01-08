@@ -16,6 +16,9 @@ class Category(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
 
+    def __str__(self):
+        return self.title
+
 
 class Advertisement(models.Model):
     STATUS_CHOICES = (
@@ -34,6 +37,9 @@ class Advertisement(models.Model):
     main_picture = models.ImageField(upload_to=main_pictures_path)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="advertisements")
 
+    def __str__(self):
+        return f"{self.title} - {self.price}T"
+    
 
 class Report(models.Model):
     id = models.AutoField(primary_key=True)
