@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 
 from advertisement.models import Advertisement
 
+from advertisement.models import Advertisement
+
 
 class Account(models.Model):
 

@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from advertisement.filters import IsAuthorFilterBackend, PriceFilterBackend, CategoryFilterBackend
+from advertisement.filters import IsAuthorFilterBackend, PriceFilterBackend, CategoryFilterBackend, \
+    FavoriteFilterBackend
 from advertisement.models import Advertisement, Category, Report
 from advertisement.permissions import IsAuthorOrAdmin
 from advertisement.serializers import AdvertisementSummarySerializer, AdvertisementSerializer, CategorySerializer, \
@@ -22,6 +23,7 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
         IsAuthorFilterBackend,
         PriceFilterBackend,
         CategoryFilterBackend,
+        FavoriteFilterBackend,
     ]
     search_fields = ['title', 'description']
     ordering_fields = ['created', 'price']
