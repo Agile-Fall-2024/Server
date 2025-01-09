@@ -4,12 +4,30 @@ from advertisement.models import Advertisement, Category, Report
 
 
 class AdvertisementSummarySerializer(serializers.ModelSerializer):
+    favorite = serializers.SerializerMethodField(allow_null=True)
+
+    def get_favorite(self, obj):
+        user = self.context['request'].user
+        if not user.is_authenticated:
+            return False
+        account = user.account
+        return account.favorite_advertisement.contains(obj)
+
     class Meta:
         model = Advertisement
-        fields = ['id', 'author_id', 'title', 'main_picture', 'price', 'status', 'category', 'created_at']
+        fields = ['id', 'author_id', 'title', 'main_picture', 'price', 'status', 'category', 'created_at', 'favorite']
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
+    favorite = serializers.SerializerMethodField()
+
+    def get_favorite(self, obj):
+        user = self.context['request'].user
+        if not user.is_authenticated:
+            return False
+        account = user.account
+        return account.favorite_advertisement.contains(obj)
+
     class Meta:
         model = Advertisement
         fields = '__all__'

@@ -5,6 +5,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
+from advertisement.models import Advertisement
+
 
 class Account(models.Model):
 
@@ -18,6 +20,7 @@ class Account(models.Model):
     address = models.TextField(blank=True, null=True, verbose_name=_("address"))
     otp = models.CharField(max_length=6, blank=True, null=True)
     otp_expiry = models.DateTimeField(blank=True, null=True)
+    favorite_advertisement = models.ManyToManyField(Advertisement)
 
     def __str__(self):
         return f"{self.user.username}'s Account"

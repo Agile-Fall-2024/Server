@@ -8,7 +8,8 @@ from .models import Account
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['phone_number', 'bio', 'address']
+        fields = ['phone_number', 'bio', 'address','favorite_advertisement']
+        read_only_fields = ['favorite_advertisement']
 
     def validate_phone_number(self, value):
         if value:
