@@ -84,3 +84,25 @@ class CategoryFilterBackend(filters.BaseFilterBackend):
                 },
             },
         ]
+
+class FavoriteFilterBackend(filters.BaseFilterBackend):
+
+    def filter_queryset(self, request, queryset, view):
+        favorite = bool(request.query_params.get('favorite', None))
+        if favorite:
+            return queryset & request.user.account.favorite_advertisement.all()
+        return queryset
+
+    def get_schema_operation_parameters(self, view):
+        return [
+            {
+                'name': 'favorite',
+                'required': False,
+                'in': 'query',
+                'description': 'if true, filter objects that user chooses as favorite',
+                'allowEmptyValue': True,
+                'schema': {
+                    'type': 'boolean',
+                },
+            },
+        ]
