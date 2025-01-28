@@ -6,7 +6,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from rest_framework import status
 
-from advertisement.models import Advertisement
+from account.models import Account
+from advertisement.models import Advertisement, Category
 
 
 def get_temporary_image():
@@ -24,17 +25,20 @@ class AdvertisementViewSetTestCase(TestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(username='test1', password='<PASSWORD>')
         self.user2 = User.objects.create_user(username='test2', password='<PASSWORD>')
+        self.account1 = Account.objects.create(user=self.user1)
+        self.account2 = Account.objects.create(user=self.user2)
+        self.category = Category.objects.create()
         self.advertisement1 = Advertisement.objects.create(title="title1", description="description1", price=1000,
-                                                           author_id=self.user1.id)
+                                                           author_id=self.user1.id, category_id=self.category.id)
         self.advertisement2 = Advertisement.objects.create(title="title2", description="description2", price=2000,
-                                                           author_id=self.user2.id)
+                                                           author_id=self.user2.id, category_id=self.category.id)
 
     @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_create_advertisement_without_login(self):
         main_picture = get_temporary_image()
 
         response = self.client.post(
-            "/advertisement/",
+            "/api/advertisement/",
             {
                 "title": "title",
                 "description": "description",
@@ -51,12 +55,13 @@ class AdvertisementViewSetTestCase(TestCase):
         main_picture = get_temporary_image()
 
         response = self.client.post(
-            "/advertisement/",
+            "/api/advertisement/",
             {
                 "title": "title",
                 "description": "description",
                 "price": 12000,
                 "main_picture": main_picture,
+                "category": self.category.id
             },
         )
 
@@ -66,7 +71,7 @@ class AdvertisementViewSetTestCase(TestCase):
         self.assertEqual(response_data["status"], 1)
 
     def test_list_advertisement(self):
-        response = self.client.get("/advertisement/")
+        response = self.client.get("/api/advertisement/")
 
         response_data = response.json()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -75,7 +80,7 @@ class AdvertisementViewSetTestCase(TestCase):
         self.assertEqual(response_data[1]["id"], self.advertisement2.id)
 
     def test_retrieve_advertisement(self):
-        response = self.client.get("/advertisement/{}/".format(self.advertisement2.id))
+        response = self.client.get("/api/advertisement/{}/".format(self.advertisement2.id))
 
         response_data = response.json()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -87,7 +92,7 @@ class AdvertisementViewSetTestCase(TestCase):
         self.client.login(username='test1', password='<PASSWORD>')
 
         response = self.client.patch(
-            "/advertisement/{}/".format(self.advertisement2.id),
+            "/api/advertisement/{}/".format(self.advertisement2.id),
             {
                 "title": "changed title",
             },
@@ -100,7 +105,7 @@ class AdvertisementViewSetTestCase(TestCase):
         self.client.login(username='test1', password='<PASSWORD>')
 
         response = self.client.patch(
-            "/advertisement/{}/".format(self.advertisement1.id),
+            "/api/advertisement/{}/".format(self.advertisement1.id),
             {
                 "title": "changed title",
             },
