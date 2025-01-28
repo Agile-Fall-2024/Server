@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-08 19:53+0330\n"
+"POT-Creation-Date: 2025-01-28 15:57+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: models.py:26
+
+#: models.py:24
 msgid "advertisement"
 msgstr "آگهی"
 
-#: models.py:27
+#: models.py:25
 msgid "advertisements"
 msgstr "آگهی‌ها"
 
-#: models.py:38
+#: models.py:36
 msgid "title"
 msgstr "عنوان"
 
-#: models.py:39
+#: models.py:37
 msgid "description"
 msgstr "توضیحات"
 
-#: models.py:40
+#: models.py:38
 msgid "price"
 msgstr "قیمت"
 
-#: models.py:41
+#: models.py:39
 msgid "status"
 msgstr "وضعیت"
 
-#: models.py:43
+#: models.py:40
 msgid "category"
 msgstr "دسته‌بندی"
 
-#: models.py:52
+#: models.py:50
 msgid "reason"
 msgstr "دلیل"
+
+#: serializers.py:49
+msgid "Pictures cannot be empty"
+msgstr "لیست تصاویر نباید خالی باشد."
