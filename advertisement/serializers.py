@@ -1,8 +1,14 @@
 from rest_framework import serializers
 
-from advertisement.models import Advertisement, Category, Report
+from advertisement.models import Advertisement, Category, Report, Picture
 from file.serializers import FileSerializer
 
+class PictureSerializer(serializers.ModelSerializer):
+    picture = FileSerializer()
+
+    class Meta:
+        model = Picture
+        fields = ['picture',]
 
 class AdvertisementSummarySerializer(serializers.ModelSerializer):
     favorite = serializers.SerializerMethodField(allow_null=True)
@@ -23,6 +29,7 @@ class AdvertisementSummarySerializer(serializers.ModelSerializer):
 class AdvertisementSerializer(serializers.ModelSerializer):
     favorite = serializers.SerializerMethodField()
     main_picture = FileSerializer(required=True)
+    pictures = PictureSerializer(many=True)
 
     def get_favorite(self, obj):
         user = self.context['request'].user
@@ -30,6 +37,13 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             return False
         account = user.account
         return account.favorite_advertisement.contains(obj)
+
+    def create(self, validated_data):
+        pictures_data = validated_data.pop('pictures')
+        advertisement = Advertisement.objects.create(**validated_data)
+        for picture_data in pictures_data:
+            Picture.objects.create(advertisement=advertisement, **picture_data)
+        return advertisement
 
     class Meta:
         model = Advertisement
