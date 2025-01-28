@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-08 19:53+0330\n"
+"POT-Creation-Date: 2025-01-28 15:06+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: models.py:26
+
+#: advertisement/models.py:26
 msgid "advertisement"
 msgstr "آگهی"
 
-#: models.py:27
+#: advertisement/models.py:27
 msgid "advertisements"
 msgstr "آگهی‌ها"
 
-#: models.py:38
+#: advertisement/models.py:38
 msgid "title"
 msgstr "عنوان"
 
-#: models.py:39
+#: advertisement/models.py:39
 msgid "description"
 msgstr "توضیحات"
 
-#: models.py:40
+#: advertisement/models.py:40
 msgid "price"
 msgstr "قیمت"
 
-#: models.py:41
+#: advertisement/models.py:41
 msgid "status"
 msgstr "وضعیت"
 
-#: models.py:43
+#: advertisement/models.py:43
 msgid "category"
 msgstr "دسته‌بندی"
 
-#: models.py:52
+#: advertisement/models.py:53
 msgid "reason"
 msgstr "دلیل"
