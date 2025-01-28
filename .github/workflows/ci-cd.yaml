@@ -57,5 +57,10 @@ jobs:
             -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
             -e DB_HOST=${{ secrets.DB_HOST }} \
             -e DB_PORT=${{ secrets.DB_PORT }} \
+            -e EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }} \
+            -e EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }} \
+            -e CSRF_TRUSTED_ORIGINS=${{ secrets.CSRF_TRUSTED_ORIGINS }} \
             -p 8000:8000 \
+            -v /etc/chizmiz/staticfiles:/app/staticfiles \
+            -v /etc/chizmiz/media:/app/media \
             ghcr.io/${{ github.repository }}/django:latest

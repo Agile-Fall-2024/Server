@@ -1,19 +1,21 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
+from django.utils.translation import gettext_lazy as _
 from .models import Account
 
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['phone_number', 'bio']
+        fields = ['phone_number', 'bio', 'address','favorite_advertisement']
+        read_only_fields = ['favorite_advertisement']
 
     def validate_phone_number(self, value):
         if value:
             account_id = self.instance.id if self.instance else None
             if Account.objects.exclude(id=account_id).filter(phone_number=value).exists():
-                raise serializers.ValidationError("This phone number is already taken.")
+                raise serializers.ValidationError(_("This phone number is already taken."))
         return value
 
 
@@ -22,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'account']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'account']
         extra_kwargs = {
             'password': {'write_only': True},
             'email': {'required': True},
@@ -30,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate_email(self, value):
         if User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("A user with that email already exists.")
+            raise serializers.ValidationError(_("A user with that email already exists."))
         return value
 
     def validate_password(self, value):
@@ -43,6 +45,8 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
             password=validated_data['password']
         )
 

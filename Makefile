@@ -1,6 +1,5 @@
 # Variables
-PYTHON = .venv/bin/python
-DJANGO_MANAGE = $(PYTHON) manage.py
+DJANGO_MANAGE = python manage.py
 ENV ?= .env
 
 # Targets
