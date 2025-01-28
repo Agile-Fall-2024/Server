@@ -8,6 +8,7 @@ from rest_framework import status, serializers
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.utils.translation import gettext_lazy as _
 
 def pictures_path(_instance, filename):
     _, ext = posixpath.splitext(filename)
@@ -23,7 +24,7 @@ class PictureUploadView(APIView):
 
     @swagger_auto_schema(
         request_body=FileUploadSerializer,
-        responses={201: openapi.Response('File uploaded successfully', FileUploadSerializer)}
+        responses={201: openapi.Response(_('File uploaded successfully'), FileUploadSerializer)}
     )
     def post(self, request, *args, **kwargs):
         file = request.FILES.get('file')
