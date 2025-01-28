@@ -5,11 +5,7 @@ from django.utils.translation import gettext_lazy as _
 import posixpath
 from uuid import uuid4
 
-
-def main_pictures_path(_instance, filename):
-    _, ext = posixpath.splitext(filename)
-    safe_name = str(uuid4())
-    return posixpath.join("main_pictures", "{}{}".format(safe_name, ext))
+from file.views import pictures_path
 
 
 class Category(models.Model):
@@ -19,7 +15,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
-
 
 class Advertisement(models.Model):
     class Meta:
@@ -39,7 +34,6 @@ class Advertisement(models.Model):
     description = models.TextField(blank=False, verbose_name=_("description"))
     price = models.DecimalField(decimal_places=2, max_digits=19, verbose_name=_("price"))
     status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name=_("status"))
-    main_picture = models.ImageField(upload_to=main_pictures_path)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="advertisements", verbose_name=_("category"))
 
     def __str__(self):
@@ -56,3 +50,8 @@ class Report(models.Model):
 
     def __str__(self):
         return f"Report by {self.user} on Ad {self.advertisement.id}"
+
+
+class Picture(models.Model):
+    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name="pictures")
+    picture = models.ImageField(upload_to=pictures_path)
