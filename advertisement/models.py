@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 import posixpath
 from uuid import uuid4
 
-from file.views import main_pictures_path, pictures_path
+from file.views import pictures_path
 
 
 class Category(models.Model):
@@ -34,7 +34,6 @@ class Advertisement(models.Model):
     description = models.TextField(blank=False, verbose_name=_("description"))
     price = models.DecimalField(decimal_places=2, max_digits=19, verbose_name=_("price"))
     status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name=_("status"))
-    main_picture = models.ImageField(upload_to=main_pictures_path)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="advertisements", verbose_name=_("category"))
 
     def __str__(self):

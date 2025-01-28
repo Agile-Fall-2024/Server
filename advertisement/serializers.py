@@ -28,7 +28,6 @@ class AdvertisementSummarySerializer(serializers.ModelSerializer):
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     favorite = serializers.SerializerMethodField()
-    main_picture = FileSerializer(required=True)
     pictures = PictureSerializer(many=True)
 
     def get_favorite(self, obj):
