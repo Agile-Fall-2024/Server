@@ -17,36 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#: advertisement/models.py:21
+#: advertisement/models.py:26
 msgid "advertisement"
 msgstr "آگهی"
 
-#: advertisement/models.py:22
+#: advertisement/models.py:27
 msgid "advertisements"
 msgstr "آگهی‌ها"
 
-#: advertisement/models.py:33
+#: advertisement/models.py:38
 msgid "title"
 msgstr "عنوان"
 
-#: advertisement/models.py:34
+#: advertisement/models.py:39
 msgid "description"
 msgstr "توضیحات"
 
-#: advertisement/models.py:35
+#: advertisement/models.py:40
 msgid "price"
 msgstr "قیمت"
 
-#: advertisement/models.py:36
+#: advertisement/models.py:41
 msgid "status"
 msgstr "وضعیت"
 
-#: advertisement/models.py:37
+#: advertisement/models.py:43
 msgid "category"
 msgstr "دسته‌بندی"
 
-#: advertisement/models.py:47
+#: advertisement/models.py:53
 msgid "reason"
 msgstr "دلیل"
 

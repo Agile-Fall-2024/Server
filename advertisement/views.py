@@ -11,6 +11,7 @@ from advertisement.models import Advertisement, Category, Report
 from advertisement.permissions import IsAuthorOrAdmin
 from advertisement.serializers import AdvertisementSummarySerializer, AdvertisementSerializer, CategorySerializer, \
     ReportSerializer
+from django.shortcuts import get_object_or_404
 
 
 class AdvertisementViewSet(viewsets.ModelViewSet):
@@ -56,6 +57,23 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
         advertisement = self.get_object()
         request.user.account.favorite_advertisement.remove(advertisement)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(methods=['get'], detail=True, permission_classes=[IsAuthenticated], url_path='owner-phone')
+    def get_owner_phone(self, request, pk=None):
+        advertisement = get_object_or_404(Advertisement, id=pk)
+        owner_account = advertisement.author.account
+        if not owner_account.phone_number:
+            return Response(
+                {"detail": "The owner has not provided a phone number."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        return Response({
+            "ad_id": advertisement.id,
+            "phone_number": owner_account.phone_number,
+            "name": f"{owner_account.user.first_name} {owner_account.user.last_name}"
+        },
+            status=status.HTTP_200_OK
+        )
 
 
 class CategoryViewSet(ReadOnlyModelViewSet):

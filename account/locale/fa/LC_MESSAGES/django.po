@@ -64,7 +64,8 @@ msgstr "کد تایید ارسال شد."
 
 #: account/views.py:46 account/views.py:76
 msgid "OTP sent to your email address. Please verify OTP to proceed."
-msgstr "کد تایید به ایمیل شما ارسال شد. لطفاً برای ادامه کد دریافت شده را وارد کنید."
+msgstr ""
+"کد تایید به ایمیل شما ارسال شد. لطفاً برای ادامه کد دریافت شده را وارد کنید."
 
 #: account/views.py:51
 msgid "Unauthorized"
