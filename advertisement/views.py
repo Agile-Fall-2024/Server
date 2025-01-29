@@ -27,7 +27,7 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
         FavoriteFilterBackend,
     ]
     search_fields = ['title', 'description']
-    ordering_fields = ['created', 'price']
+    ordering_fields = ['created_at', 'price']
 
     def get_serializer_class(self):
         if self.action == 'list':

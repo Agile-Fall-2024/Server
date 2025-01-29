@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 (
                     "main_picture",
                     models.ImageField(
-                        upload_to=advertisement.models.main_pictures_path
+
                     ),
                 ),
                 (
