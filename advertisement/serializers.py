@@ -11,6 +11,7 @@ class PictureSerializer(serializers.ModelSerializer):
         model = Picture
         fields = ['picture',]
 
+
 class AdvertisementSummarySerializer(serializers.ModelSerializer):
     favorite = serializers.SerializerMethodField(allow_null=True)
     main_picture = serializers.SerializerMethodField()
@@ -25,8 +26,10 @@ class AdvertisementSummarySerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if not user.is_authenticated:
             return False
-        account = user.account
-        return account.favorite_advertisement.contains(obj)
+        account = user.account if hasattr(user, 'account') else None
+        if not account:
+            return False
+        return account.favorite_advertisement.filter(id=obj.id).exists()
 
     class Meta:
         model = Advertisement
@@ -41,8 +44,10 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if not user.is_authenticated:
             return False
-        account = user.account
-        return account.favorite_advertisement.contains(obj)
+        account = user.account if hasattr(user, 'account') else None
+        if not account:
+            return False
+        return account.favorite_advertisement.filter(id=obj.id).exists()
 
     def validate_pictures(self, value):
         if not value:
@@ -55,6 +60,24 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         for picture_data in pictures_data:
             Picture.objects.create(advertisement=advertisement, **picture_data)
         return advertisement
+
+    def update(self, instance, validated_data):
+        pictures_data = validated_data.pop('pictures', None)
+        # Update the fields in the Advertisement model
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        # Handle the nested 'pictures' field separately
+        if pictures_data is not None:
+            # First, remove all existing pictures associated with the advertisement
+            instance.pictures.all().delete()
+
+            # Add the new pictures
+            for picture_data in pictures_data:
+                Picture.objects.create(advertisement=instance, **picture_data)
+
+        return instance
 
     class Meta:
         model = Advertisement
