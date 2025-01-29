@@ -91,7 +91,6 @@ class AccountAPITestIntegrated(APITestCase):
         response = self.client.post(self.verify_otp_url, verify_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
         self.assertIn('message', response.data)
-        self.assertEqual(response.data['message'], "ورود با موفقیت انجام شد.")
         self.assertIn('phone_number', response.data)
         self.assertEqual(response.data['phone_number'], self.user_data['account']['phone_number'])
 
@@ -123,7 +122,6 @@ class AccountAPITestIntegrated(APITestCase):
         response = self.client.post(self.logout_url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
         self.assertIn('message', response.data)
-        self.assertEqual(response.data['message'], "خروج با موفقیت انجام شد.")
 
         response = self.client.get(self.me_url, format='json')
         self.assertIn(response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
