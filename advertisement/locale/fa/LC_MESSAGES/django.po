@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 15:06+0330\n"
+"POT-Creation-Date: 2025-01-28 16:09+0330\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
 #: advertisement/models.py:26
 msgid "advertisement"
 msgstr "آگهی"
@@ -49,3 +48,7 @@ msgstr "دسته‌بندی"
 #: advertisement/models.py:53
 msgid "reason"
 msgstr "دلیل"
+
+#: advertisement/serializers.py:49
+msgid "Pictures cannot be empty"
+msgstr "لیست تصاویر نباید خالی باشد."

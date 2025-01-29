@@ -2,6 +2,7 @@ import tempfile
 
 from PIL import Image
 from django.contrib.auth.models import User
+from django.core.files.storage import default_storage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from rest_framework import status
@@ -52,18 +53,20 @@ class AdvertisementViewSetTestCase(TestCase):
     @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_create_advertisement(self):
         self.client.login(username='test1', password='<PASSWORD>')
-        main_picture = get_temporary_image()
+        picture1 = default_storage.save('pictures/test1.jpg', get_temporary_image())
+        picture2 = default_storage.save('pictures/test2.jpg', get_temporary_image())
 
-        response = self.client.post(
-            "/api/advertisement/",
-            {
-                "title": "title",
-                "description": "description",
-                "price": 12000,
-                "main_picture": main_picture,
-                "category": self.category.id
-            },
-        )
+        data = {
+            "title": "title",
+            "description": "description",
+            "price": 12000,
+            "pictures": [
+                {"picture": picture1},
+                {"picture": picture2}
+            ],
+            "category": self.category.id
+        }
+        response = self.client.post("/api/advertisement/", data, content_type='application/json')
 
         response_data = response.json()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
