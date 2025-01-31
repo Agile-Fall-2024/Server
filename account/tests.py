@@ -56,7 +56,7 @@ class AccountAPITestIntegrated(APITestCase):
 
         # 1) Sign up
         response = self.client.post(self.signup_url, self.user_data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN, response.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK, response.data)
         self.assertIn('id', response.data)
         self.assertIn('account', response.data)
         self.assertEqual(response.data['username'], self.user_data['username'])
